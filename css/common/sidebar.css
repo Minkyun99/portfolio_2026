@@ -1,0 +1,22 @@
+
+.sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:#f7f7f5;border-right:1px solid rgba(55,53,47,.09);}
+.main{margin-left:240px;max-width:860px}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 2px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .15s ease;
+}
+
+.nav-item:hover {
+    background: #edf4ff;
+}
+
+.nav-item.active {
+    background: #2f6feb;
+    color: white;
+}

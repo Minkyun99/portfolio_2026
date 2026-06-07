@@ -1,0 +1,46 @@
+:root {
+    --sidebar-width: 240px;
+    --content-width: 860px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    min-height: 100vh;
+    background: #ffffff;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid #e5e7eb;
+    background: #fafafa;
+    z-index: 1000;
+}
+
+/* Main */
+.main {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    min-height: 100vh;
+}
+
+/* Content */
+#content {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 48px 64px;
+}

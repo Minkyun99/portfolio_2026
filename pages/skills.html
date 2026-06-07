@@ -1,0 +1,553 @@
+<div class="intro-skills-block" id="skills">
+<div class="h2">⚡ 스킬</div>
+<hr class="notion"/>
+<div class="skills-section">
+<!-- 스킬 그리드 테이블 -->
+<style>
+        .skill-table { width:100%; border-collapse:collapse; }
+        .skill-table th {
+          background: var(--bg2);
+          padding: 8px 14px;
+          text-align: left;
+          font-size: 11px;
+          font-weight: 600;
+          color: var(--text3);
+          border: 1px solid var(--border);
+          font-family: var(--mono);
+          text-transform: uppercase;
+          letter-spacing: .05em;
+          white-space: nowrap;
+          width: 130px;
+        }
+        .skill-table td {
+          padding: 10px 14px;
+          border: 1px solid var(--border);
+          vertical-align: middle;
+        }
+        .skill-table tr:hover td { background: var(--bg2); }
+        .skill-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+        .sc { display:inline-flex; align-items:center; padding:3px 10px; border-radius:4px; font-size:12.5px; font-weight:400; border:1px solid; }
+        .sc-blue   { background:#dbeafe; color:#1d4ed8; border-color:rgba(29,78,216,.2); }
+        .sc-teal   { background:#ccfbf1; color:#0f766e; border-color:rgba(15,118,110,.2); }
+        .sc-purple { background:#ede9fe; color:#6d28d9; border-color:rgba(109,40,217,.2); }
+        .sc-orange { background:#ffedd5; color:#c2410c; border-color:rgba(194,65,12,.2); }
+        .sc-gray   { background:var(--bg3); color:var(--text2); border-color:var(--border2); }
+        .sc-main   { background:var(--accent-bg); color:var(--accent); border-color:rgba(47,111,235,.2); font-weight:500; }
+        .sc.skill-mini {
+          position: relative;
+          flex-direction: column;
+          align-items: stretch;
+          justify-content: center;
+          gap: 3px;
+          padding-top: 5px;
+          min-width: 92px;
+        }
+        .skill-label-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
+          width: 100%;
+          line-height: 1.25;
+        }
+        .skill-name { white-space: nowrap; }
+        .skill-level {
+          font-family: var(--mono);
+          font-size: 10px;
+          font-weight: 600;
+          opacity: .72;
+          white-space: nowrap;
+        }
+        .sc.skill-mini::before {
+          content: '';
+          display: block;
+          width: var(--level, 80%);
+          height: 2px;
+          border-radius: 999px;
+          background: currentColor;
+          opacity: .55;
+        }
+      
+
+/* =========================================================
+   PROJECT DETAIL UNIFIED DESIGN — TRIPSNAP / CODEFARM / EVENOVEN
+   핵심 기능 카드, 구분선, 폰트 크기, 여백 통일
+   ========================================================= */
+#tripsnap, #codefarm-detail, #evenoven-detail, #fivedotfive-detail {
+  --project-h2-size: 20px;
+  --project-h3-size: 16px;
+  --project-topic-size: 17px;
+  --project-body-size: 13px;
+  --project-caption-size: 11px;
+  --project-card-radius: 10px;
+  --project-gap-sm: 8px;
+  --project-gap-md: 14px;
+  --project-gap-lg: 24px;
+}
+
+#tripsnap > .h2,
+#codefarm-detail > .h2,
+#evenoven-detail > .h2 {
+  font-size: var(--project-h2-size) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  margin: 30px 0 12px !important;
+  color: var(--text) !important;
+}
+
+#tripsnap .proj-card,
+#codefarm-detail .proj-card,
+#evenoven-detail .proj-card,
+#fivedotfive-detail .proj-card {
+  border: 1px solid var(--border2) !important;
+  border-radius: 10px !important;
+  padding: 18px 20px !important;
+  background: var(--bg) !important;
+  box-shadow: 0 1px 10px rgba(55,53,47,.045) !important;
+}
+
+#tripsnap .proj-name,
+#codefarm-detail .proj-name,
+#evenoven-detail .proj-name,
+#fivedotfive-detail .proj-name {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  line-height: 1.45 !important;
+}
+
+#tripsnap .proj-desc,
+#codefarm-detail .proj-desc,
+#evenoven-detail .proj-desc,
+#tripsnap .proj-meta,
+#codefarm-detail .proj-meta,
+#evenoven-detail .proj-meta,
+#fivedotfive-detail .proj-meta {
+  font-size: var(--project-body-size) !important;
+  line-height: 1.75 !important;
+}
+
+#tripsnap .detail-section,
+#codefarm-detail .detail-section,
+#evenoven-detail .detail-section,
+#fivedotfive-detail .detail-section {
+  margin-top: 16px !important;
+  padding-top: 18px !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+/* 대주제 제목: 세 프로젝트 모두 EvenOven형 라인 제목으로 통일 */
+#tripsnap .detail-section > .h3,
+#codefarm-detail .detail-section > .h3,
+#evenoven-detail .detail-section > .h3,
+#tripsnap .detail-section > div[style*="font-size:17px;font-weight:700"],
+#codefarm-detail .detail-section > div[style*="font-size:17px;font-weight:700"],
+#evenoven-detail .detail-section > div[style*="font-size:17px;font-weight:700"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: var(--project-topic-size) !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  margin: 28px 0 14px !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+  line-height: 1.45 !important;
+}
+
+#tripsnap .detail-section > .h3::after,
+#codefarm-detail .detail-section > .h3::after,
+#evenoven-detail .detail-section > .h3::after,
+#tripsnap .detail-section > div[style*="font-size:17px;font-weight:700"]::after,
+#codefarm-detail .detail-section > div[style*="font-size:17px;font-weight:700"]::after,
+#evenoven-detail .detail-section > div[style*="font-size:17px;font-weight:700"]::after {
+  content: '' !important;
+  flex: 1 !important;
+  height: 1px !important;
+  background: var(--border) !important;
+  margin-left: 8px !important;
+}
+
+/* 주제별 구분선: 세 프로젝트 동일 */
+#tripsnap .section-divider,
+#codefarm-detail .section-divider,
+#evenoven-detail .section-divider,
+#tripsnap .tripsnap-topic-divider,
+#codefarm-detail .tripsnap-topic-divider,
+#evenoven-detail .tripsnap-topic-divider {
+  border: none !important;
+  border-top: 2px solid var(--border) !important;
+  margin: 32px 0 28px !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+/* 핵심 기능 번호 카드 통일 */
+#tripsnap .feat-block,
+#codefarm-detail .feat-block,
+#evenoven-detail .feat-block {
+  background: linear-gradient(180deg, #fafafa 0%, var(--bg2) 100%) !important;
+  border: 1px solid var(--border2) !important;
+  border-left: 4px solid var(--accent) !important;
+  border-radius: var(--project-card-radius) !important;
+  padding: 22px 22px 20px !important;
+  margin: 22px 0 !important;
+  box-shadow: 0 1px 10px rgba(55,53,47,.045) !important;
+}
+
+#tripsnap .feat-block + .feat-block,
+#codefarm-detail .feat-block + .feat-block,
+#evenoven-detail .feat-block + .feat-block,
+#fivedotfive-detail .feat-block + .feat-block {
+  margin-top: 26px !important;
+}
+
+#tripsnap .feat-block > div:first-child,
+#codefarm-detail .feat-block > div:first-child,
+#evenoven-detail .feat-block > div:first-child {
+  margin-top: 0 !important;
+  padding-bottom: 12px !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+#tripsnap .feat-block strong,
+#codefarm-detail .feat-block strong,
+#evenoven-detail .feat-block strong {
+  font-weight: 700 !important;
+}
+
+/* 소제목/본문/표/캡션 크기 통일 */
+#tripsnap .h3,
+#codefarm-detail .h3,
+#evenoven-detail .h3 {
+  font-size: var(--project-h3-size) !important;
+  font-weight: 700 !important;
+}
+
+#tripsnap .role-table,
+#codefarm-detail .role-table,
+#evenoven-detail .role-table,
+#tripsnap .compare-table,
+#codefarm-detail .compare-table,
+#evenoven-detail .compare-table,
+#tripsnap .trouble-card,
+#codefarm-detail .trouble-card,
+#evenoven-detail .trouble-card,
+#tripsnap .callout,
+#codefarm-detail .callout,
+#evenoven-detail .callout,
+#tripsnap .toggle-header,
+#codefarm-detail .toggle-header,
+#evenoven-detail .toggle-header,
+#tripsnap .toggle-body,
+#codefarm-detail .toggle-body,
+#evenoven-detail .toggle-body {
+  font-size: var(--project-body-size) !important;
+  line-height: 1.7 !important;
+}
+
+#tripsnap .img-caption,
+#codefarm-detail .img-caption,
+#evenoven-detail .img-caption {
+  font-size: var(--project-caption-size) !important;
+  color: var(--text3) !important;
+  line-height: 1.6 !important;
+  padding: 5px 0 12px !important;
+}
+
+#tripsnap .img-grid-2,
+#codefarm-detail .img-grid-2,
+#evenoven-detail .img-grid-2,
+#tripsnap .code-grid-2,
+#codefarm-detail .code-grid-2,
+#evenoven-detail .code-grid-2 {
+  gap: 10px !important;
+  margin: 12px 0 8px !important;
+}
+
+#tripsnap .img-showcase,
+#codefarm-detail .img-showcase,
+#evenoven-detail .img-showcase,
+#tripsnap .code-img-panel,
+#codefarm-detail .code-img-panel,
+#evenoven-detail .code-img-panel {
+  border-radius: 8px !important;
+  border: 1px solid var(--border2) !important;
+  overflow: hidden !important;
+}
+
+#tripsnap .metrics-row,
+#codefarm-detail .metrics-row,
+#evenoven-detail .metrics-row {
+  gap: 8px !important;
+  margin: 12px 0 !important;
+}
+
+#tripsnap .metric-card,
+#codefarm-detail .metric-card,
+#evenoven-detail .metric-card {
+  border-radius: 8px !important;
+  padding: 11px 10px !important;
+}
+
+/* 내부 리스트형 카드의 최소 시각 규칙 통일 */
+#tripsnap .detail-section div[style*="border-left:3px solid var(--red)"],
+#codefarm-detail .detail-section div[style*="border-left:3px solid var(--red)"],
+#evenoven-detail .detail-section div[style*="border-left:3px solid var(--red)"],
+#tripsnap .detail-section div[style*="border-left:3px solid var(--green)"],
+#codefarm-detail .detail-section div[style*="border-left:3px solid var(--green)"],
+#evenoven-detail .detail-section div[style*="border-left:3px solid var(--green)"] {
+  border-radius: 6px !important;
+  padding: 9px 13px !important;
+  font-size: var(--project-body-size) !important;
+  line-height: 1.65 !important;
+}
+
+/* 토글 버튼 통일 및 클릭 영역 명확화 */
+#tripsnap .toggle-wrap,
+#codefarm-detail .toggle-wrap,
+#evenoven-detail .toggle-wrap {
+  border-radius: 8px !important;
+  border: 1px solid var(--border2) !important;
+  margin-bottom: 10px !important;
+  background: var(--bg) !important;
+}
+
+#tripsnap .toggle-header,
+#codefarm-detail .toggle-header,
+#evenoven-detail .toggle-header {
+  padding: 11px 14px !important;
+  font-weight: 600 !important;
+}
+
+/* 프로젝트별로 따로 들어간 divider/heading 이름도 동일 톤으로 보정 */
+#tripsnap .tripsnap-divided-heading,
+#codefarm-detail .tripsnap-divided-heading,
+#evenoven-detail .tripsnap-divided-heading {
+  font-size: var(--project-topic-size) !important;
+  font-weight: 700 !important;
+  margin: 28px 0 14px !important;
+}
+
+
+/* ── 비클릭 요소 hover 효과 제거 + 프로필 이미지 모달 ── */
+.proj-card:hover,
+.feat-block:hover,
+.trouble-card:hover,
+.badge:hover,
+.skill-chip:hover,
+.img-showcase:hover,
+.callout:hover {
+  transform: none !important;
+  box-shadow: inherit !important;
+  filter: none !important;
+  border-color: var(--border) !important;
+}
+.role-table tr:hover td,
+.compare-table tr:hover td {
+  background: inherit !important;
+}
+.proj-card:hover {
+  border-color: var(--border) !important;
+}
+.profile-photo {
+  cursor: zoom-in;
+  transition: box-shadow .16s, transform .16s, border-color .16s;
+}
+.profile-photo:hover,
+.profile-photo:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(55,53,47,.16);
+  border-color: var(--accent);
+  outline: none;
+}
+.image-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: rgba(15, 23, 42, .68);
+  backdrop-filter: blur(3px);
+  z-index: 9999;
+}
+.image-modal.open {
+  display: flex;
+}
+.image-modal-panel {
+  position: relative;
+  max-width: min(520px, 92vw);
+  max-height: 88vh;
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 18px 50px rgba(0,0,0,.28);
+}
+.image-modal-panel img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(88vh - 28px);
+  border-radius: 8px;
+  object-fit: contain;
+}
+.image-modal-close {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,.18);
+}
+.image-modal-close:hover,
+.image-modal-close:focus {
+  background: #eef3ff;
+  color: var(--accent);
+  outline: none;
+}
+body.modal-open {
+  overflow: hidden;
+}
+
+
+/* ── 최종 hover 통일: 스킬 테이블 톤을 텍스트 박스 전반에 적용 ── */
+/* 실제 클릭/확대 대상은 커서와 별도 hover를 유지하고, 일반 텍스트 박스는 살짝 떠오르는 정도로 통일 */
+.proj-card:hover,
+.feat-block:hover,
+.trouble-card:hover,
+.callout:hover,
+.cert-card:hover,
+.metric-card:hover,
+.arch-wrap:hover,
+.codefarm-note-card:hover,
+.toggle-wrap:hover,
+.prop-table:hover,
+.skill-table:hover,
+.role-table:hover,
+.compare-table:hover {
+  background: var(--bg2) !important;
+  border-color: var(--border2) !important;
+  box-shadow: 0 3px 12px rgba(55,53,47,.08) !important;
+  transform: translateY(-1px) !important;
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease !important;
+}
+
+.proj-card,
+.feat-block,
+.trouble-card,
+.callout,
+.cert-card,
+.metric-card,
+.arch-wrap,
+.codefarm-note-card,
+.toggle-wrap,
+.prop-table,
+.skill-table,
+.role-table,
+.compare-table {
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease !important;
+}
+
+/* 표 내부는 스킬 테이블처럼 행 배경만 은은하게 */
+.skill-table tr:hover td,
+.role-table tr:hover td,
+.compare-table tr:hover td {
+  background: var(--bg2) !important;
+}
+
+/* 작은 라벨/칩/뱃지는 움직이지 않게 유지 */
+.badge:hover,
+.skill-chip:hover,
+.sc:hover,
+.layer-box:hover,
+.result-badge:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* 이미지 확대 대상은 텍스트 박스 hover와 분리 */
+.modal-zoomable-img:hover,
+.modal-zoomable-img:focus {
+  transform: scale(1.01) !important;
+  box-shadow: 0 6px 20px rgba(55,53,47,.14) !important;
+  border-color: var(--accent) !important;
+  cursor: zoom-in !important;
+}
+
+.profile-photo:hover,
+.profile-photo:focus {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(55,53,47,.16) !important;
+  border-color: var(--accent) !important;
+}
+</style>
+<table class="skill-table">
+<tr>
+<th><div class="skill-cat-head"><span class="skill-cat-title">🤖 AI / NLP</span><div class="skill-cat-score-row"><div class="skill-score-blocks"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><span class="skill-cat-score">9/10</span></div></div></th>
+<td>
+<div class="skill-chips">
+<span class="sc sc-main">KoELECTRA / BERT</span>
+<span class="sc sc-main">RAG 설계</span>
+<span class="sc sc-main">LLM API 통합</span>
+<span class="sc sc-main">멀티라벨 분류</span>
+<span class="sc sc-blue">PyTorch</span>
+<span class="sc sc-blue">HuggingFace</span>
+<span class="sc sc-blue">ChromaDB</span>
+<span class="sc sc-blue">Prompt Engineering</span>
+<span class="sc sc-blue">NLP / 자연어처리</span>
+<span class="sc sc-blue">CodeLlama (QLoRA)</span>
+</div>
+</td>
+</tr>
+<tr>
+<th><div class="skill-cat-head"><span class="skill-cat-title">💻 Programming</span><div class="skill-cat-score-row"><div class="skill-score-blocks"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div><span class="skill-cat-score">8/10</span></div></div></th>
+<td>
+<div class="skill-chips">
+<span class="sc sc-main">Python 3.11</span>
+<span class="sc sc-main">Vue 3 / Pinia</span>
+<span class="sc sc-main">Django</span>
+<span class="sc sc-main">FastAPI</span>
+<span class="sc sc-teal">JavaScript ES6</span>
+<span class="sc sc-teal">JWT Auth</span>
+<span class="sc sc-teal">REST API 설계</span>
+<span class="sc sc-teal">asyncio / Session Lock</span>
+<span class="sc sc-teal">SQL / SQLD</span>
+</div>
+</td>
+</tr>
+<tr>
+<th><div class="skill-cat-head"><span class="skill-cat-title">📋 PM</span><div class="skill-cat-score-row"><div class="skill-score-blocks"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><span class="skill-cat-score">9/10</span></div></div></th>
+<td>
+<div class="skill-chips">
+<span class="sc sc-main">서비스 기획 · 기능 정의</span>
+<span class="sc sc-main">스프린트 · 일정 관리</span>
+<span class="sc sc-purple">Jira · Notion</span>
+<span class="sc sc-purple">요구사항 명세서</span>
+<span class="sc sc-purple">이해관계자 커뮤니케이션</span>
+<span class="sc sc-purple">리스크 관리</span>
+</div>
+</td>
+</tr>
+<tr>
+<th><div class="skill-cat-head"><span class="skill-cat-title">🔧 Infra / Tools</span><div class="skill-cat-score-row"><div class="skill-score-blocks"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div><span class="skill-cat-score">8/10</span></div></div></th>
+<td>
+<div class="skill-chips">
+<span class="sc sc-gray">Notion</span>
+<span class="sc sc-gray">Jira</span>
+<span class="sc sc-gray">Git · GitHub Flow</span>
+<span class="sc sc-gray">AWS EC2</span>
+<span class="sc sc-gray">Uvicorn</span>
+<span class="sc sc-gray">Kakao Maps SDK</span>
+</div>
+</td>
+</tr>
+</table>
+</div> </div>
