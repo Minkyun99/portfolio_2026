@@ -491,9 +491,7 @@ code{font-family:var(--mono);font-size:12px;background:var(--bg2);border:1px sol
   width: 100%;
   border-collapse: collapse;
 }
-#codefarm-detail .toggle-body.open {
-  display: block !important;
-}
+
 #codefarm-detail .codefarm-note-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -807,7 +805,39 @@ body {
 @media (max-width: 860px) {
   #content.main { margin-left: 0 !important; max-width: 100% !important; padding: 0 20px !important; }
 }
-  </style>
+  
+/* IMAGE MODAL */
+#imageModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+#imageModal img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 6px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  object-fit: contain;
+  cursor: default;
+}
+#imageModalClose {
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+  line-height: 1;
+  user-select: none;
+  opacity: 0.8;
+}
+#imageModalClose:hover { opacity: 1; }
+</style>
 </head>
 <body>
 
@@ -826,6 +856,7 @@ body {
     <a class="nav-item nav-sub" data-target="codefarm-detail">💻 CODEFARM</a>
     <a class="nav-item nav-sub" data-target="evenoven-detail">🍞 EVENOVEN</a>
     <a class="nav-item nav-sub" data-target="fivedotfive-detail">🎁 오쩜오</a>
+    <a class="nav-item nav-sub" data-target="imodcs-detail">🚢 IMO DCS 자동화</a>
   </nav>
 </aside>
 
@@ -1443,8 +1474,7 @@ body.modal-open {
 <div class="tl-date">2026.04.06 — 2026.06.02</div>
 <div class="tl-title">
           오쩜오 (FiveDotFive)
-          <span class="badge badge-samsung">🏆 SSAFY 14기 S14P31F205</span>
-</div>
+          </div>
 <div class="tl-role">PM · 기획 · Frontend (6인 팀)</div>
 <div class="tl-desc">
 <ul>
@@ -1548,18 +1578,24 @@ body.modal-open {
 </div>
 <!-- 사내 챗봇 -->
 <div class="tl-item">
-<div class="tl-dot"></div>
+<div class="tl-dot highlight"></div>
 <div class="tl-date">2024.11 — 2025.02</div>
 <div class="tl-title">사내 24시간 자동 응답 챗봇</div>
-<div class="tl-role">개발 참여</div>
+<div class="tl-role">기획 · 데이터 구조화 · 챗봇 개발 (4인 팀)</div>
 <div class="tl-desc">
 <ul>
-<li>용어 표준화 기반 업무 자동화 시스템</li>
+<li>부서별로 혼용되는 용어를 정리하고 <strong>용어 표준화 기반 자동 응답 체계</strong> 구축</li>
+<li>사내 프로그램 사용 설명서 · 내부 정책 문서를 체계적으로 정리하여 Q&amp;A 형태의 데이터셋 구축</li>
+<li>의도 분류 및 엔티티 추출 기반 챗봇 설계, 동의어 사전 · 표준 용어 매핑 테이블 작성</li>
+<li><strong>신입·타 부서 인원의 반복 질문 70% 감소</strong>, 실무자 업무 집중도 향상 및 온보딩 시간 단축</li>
 </ul>
 </div>
 <div class="tl-tags">
 <span class="badge badge-blue">챗봇</span>
-<span class="badge badge-gray">업무 자동화</span>
+<span class="badge badge-purple">기획</span>
+<span class="badge badge-teal">데이터 구조화</span>
+<span class="badge badge-orange">의도 분류</span>
+<span class="badge badge-green">반복질문 70%↓</span>
 </div>
 </div>
 <!-- IMO DCS -->
@@ -1621,7 +1657,16 @@ body.modal-open {
 <div class="detail-section">
 <div class="h3">🙋 나의 역할</div>
 <table class="role-table">
-<tr><th style="width:80px">PM</th><td>서비스 기획·기능 정의 (요구사항 명세서, Jira 스프린트 관리), 개발 일정 조율</td></tr>
+<tr><th style="width:80px">PM<br/><div class="pct-bar"><div class="bar-track"><div class="bar-fill bar-green" style="width:100%"></div></div><span class="pct">100%</span></div></th><td>
+              <strong>프로젝트 제안서 직접 작성</strong> — 서비스명(TRIPSNAP)·핵심 컨셉·기대 효과를 정리한
+              제안서를 팀 대표로 작성, 개발 방향 기준점 수립 ·
+              <strong>기능 정의 및 우선순위 결정</strong> — 사용자 시나리오 기반으로 여행 기록·경로 추천·지도 렌더링 등
+              핵심 기능 범위 확정, 외부 API(카카오 지도·날씨) 연동 스펙 사전 합의 ·
+              <strong>Jira 스프린트 관리</strong> — 2주 단위 스프린트 계획·리뷰·회고 진행,
+              기능별 티켓 세분화 및 예상 공수 산정으로 팀 전체 진도 가시화 ·
+              <strong>역할 배분·일정 조율</strong> — FE·BE 의존성 구간(지도 API 스펙) 직접 중재,
+              병목 발생 시 즉시 작업자 재배치로 데드라인 리스크 관리
+            </td></tr>
 <tr>
 <th>FE<br/><div class="pct-bar"><div class="bar-track"><div class="bar-fill bar-blue" style="width:80%"></div></div><span class="pct">80%</span></div></th>
 <td>Vue 3 + Pinia 전역 상태 관리 · JWT Access/Refresh 인증 흐름 · 카카오 지도 렌더링 · 추천 경로 시각화</td>
@@ -2044,11 +2089,18 @@ body.modal-open {
 <div class="detail-section">
 <div style="font-size:17px;font-weight:700;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px;">🙋 나의 역할<span style="flex:1;height:1px;background:var(--border);margin-left:8px;"></span></div>
 <table class="role-table">
-<tr><th style="width:80px">PM</th><td>
-            MVP 기능 범위·우선순위 설정 · 화면 단위 컴포넌트 분리로 FE 병렬 개발 구조 설계 ·
-            BE·FE 간 API 명세 분리 및 개발 일정 조율 · 팀원 이슈 발생 시 대체 작업자 배정 및 일정 리스크 관리 ·
-            데일리 진행 상황 점검 및 기능 간 의존성 관리
-          </td></tr>
+<tr><th style="width:80px">PM<br/><div class="pct-bar"><div class="bar-track"><div class="bar-fill bar-green" style="width:100%"></div></div><span class="pct">100%</span></div></th><td>
+              <strong>요구사항 명세서 직접 작성 (6인 팀)</strong> — FR-COMMON·FR-AUTH·FR-PROBLEM·FR-ROADMAP·FR-CODE·FR-MYPAGE
+              6개 도메인별 기능 요구사항과 서비스 정책(힌트·코드실행·리포트·카드·IDE 정책)을 구체적 규칙 수준까지 문서화 ·
+              <strong>AI 시스템 요구사항 설계</strong> — 파인튜닝 모델(사용자 어려움 구조화)과
+              프롬프팅 기반 생성 모델(OpenAI 힌트·리포트 생성) 역할 분리 명세,
+              10초 단위 코드 상태 수집 파이프라인 설계 ·
+              <strong>인프라·CI/CD 요구사항 정의</strong> — 브랜치 전략 및 배포 정책 문서화 ·
+              <strong>MVP 우선순위 결정</strong> — 화면 단위 컴포넌트 분리로 FE 병렬 개발 구조 설계,
+              BE·FE 간 API 명세 사전 합의로 의존성 충돌 방지 ·
+              <strong>Jira 스프린트 관리</strong> — 6인 팀 역할별 업무 배분, 데일리 진행 상황 점검,
+              팀원 이슈 발생 시 대체 작업자 배정 및 일정 리스크 관리
+            </td></tr>
 <tr>
 <th>AI / Data<br/><div class="pct-bar"><div class="bar-track"><div class="bar-fill bar-purple" style="width:80%"></div></div><span class="pct">80%</span></div></th>
 <td>
@@ -2677,10 +2729,17 @@ body.modal-open {
 <!-- 나의 역할 -->
 <div style="font-size:17px;font-weight:700;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px;">🙋 나의 역할<span style="flex:1;height:1px;background:var(--border);margin-left:8px;"></span></div>
 <table class="role-table">
-<tr><th style="width:80px">PM</th><td>
-            서비스 기획 명세서 직접 작성 (구체적 정책 수준까지) · 프론트엔드·백엔드·AI·인프라 팀별 업무 배분 및 일정 조율 ·
-            스프린트 관리 · 팀원 이슈 발생 시 대체 작업자 배정
-          </td></tr>
+<tr><th style="width:80px">PM<br/><div class="pct-bar"><div class="bar-track"><div class="bar-fill bar-green" style="width:100%"></div></div><span class="pct">100%</span></div></th><td>
+              <strong>고도화 기획 명세서 V2 직접 작성</strong> — 문제 정의(빵지순례 정보 파편화·신규 폐업 반영 지연·리뷰 실시간 반영 한계)부터
+              기능 요구사항(F100~F900: 인증·메인·지도·경로·챗봇/RAG·빵집 상세·데이터 자동화·AI 재학습)까지 전 범위 문서화 ·
+              <strong>데이터 정책 설계</strong> — 수집 주기(지역별 주 1회·IP 차단 방지), 플랫폼별 리뷰 가중치 정책,
+              프랜차이즈 필터링 3단계 기준(명칭 정규화→공정위 DB 대조→지점 표현 제거) 직접 수립 ·
+              <strong>데이터 파이프라인 아키텍처 명세</strong> — Ingestion→Processing→Storage→Feature→Serving 5계층 구조,
+              Playwright 크롤러(Track A)·API Collector(Track B) 이중 수집 전략, Airflow 오케스트레이션 정의 ·
+              <strong>4개 파트 업무 배분·Jira 스프린트 관리</strong> — FE·BE·AI·인프라 파트별 기능 목록을
+              스프린트 단위로 배분, 파트 간 API 스펙·AI 입출력 형식 사전 합의 ·
+              <strong>리스크 대응</strong> — AI 스케줄러 지연 시 담당자 재배치 및 MVP 우선 완성 순서로 일정 재조정
+            </td></tr>
 <tr>
 <th>AI<br/><div class="pct-bar"><div class="bar-track"><div class="bar-fill bar-purple" style="width:100%"></div></div><span class="pct">100%</span></div></th>
 <td>
@@ -3166,8 +3225,18 @@ body.modal-open {
 <div class="h3">🙋 나의 역할</div>
 <table class="role-table">
 <tr>
-<th style="width:80px">PM</th>
-<td>서비스 기획 전반, 기능 정의 및 우선순위 조율, Jira 스프린트 관리, 팀원 간 업무 배분·일정 조율</td>
+<th style="width:80px">PM<br/><div class="pct-bar"><div class="bar-track"><div class="bar-fill bar-green" style="width:100%"></div></div><span class="pct">100%</span></div></th>
+<td>
+  <strong>서비스 기획 명세서 직접 작성</strong> — 문제 정의(아이 니즈 표현 부족·부모 선택 어려움·친구 간 소통 구조 부재)부터
+  기능 요구사항(F100~F600: 인증·랭킹·위시리스트·댓글·마이페이지),
+  위시리스트 버전 관리 정책·댓글 정책·투표 정책까지 구체적 규칙 수준으로 문서화 ·
+  <strong>비즈니스 모델·확산 구조 설계</strong> — 작성→공유→유입→반응→재공유 바이럴 루프 및
+  감정 기반 UX 흐름(기대→반응→만족) 기획 ·
+  <strong>Jira 스프린트 관리</strong> — 2주 단위 스프린트 계획·리뷰·회고 운영,
+  에픽·스토리·태스크 3단계 티켓 구조로 팀 전체 진도 가시화 ·
+  <strong>역할 배분·일정 조율</strong> — FE·BE 의존성 파악 후 병렬 개발 가능 구간 최대화,
+  병목 발생 시 즉시 작업자 재배치
+</td>
 </tr>
 <tr>
 <th>기획</th>
@@ -3562,264 +3631,521 @@ body.modal-open {
 </div><!-- /proj-card -->
 </div>
 
-</main>
+<!-- ── IMO DCS 상세 ── -->
+<div class="section" id="imodcs-detail">
+<div class="h2">🚢 IMO DCS 검증 자동화 — 상세</div>
+<hr class="notion"/>
+<div class="proj-card">
+<div style="margin-bottom:10px;">
+  <span class="badge badge-green" style="font-size:13px;padding:4px 12px;">⚡ 입사 1개월 만에 단독 개발</span>
+  <span class="badge badge-orange" style="font-size:13px;padding:4px 12px;margin-left:6px;">⏱ 업무 효율 120배 향상</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;">
+  <div class="proj-name" style="font-size:17px;">🚢 IMO DCS 선박 데이터 검증 자동화 프로그램</div>
+  <span class="badge badge-blue">Python</span>
+  <span class="badge badge-teal">업무 자동화</span>
+  <span class="badge badge-gray">단독 개발</span>
+</div>
+<div class="proj-desc">입사 1개월 만에 단독 설계·개발한 IMO DCS(Data Collection System) 선박 데이터 검증 자동화 프로그램. 선박 1척당 1시간 이상 소요되던 수작업 검증을 30초 이내로 단축하여 팀 전체 업무에 적용되었으며, 선박 데이터 오류를 실시간으로 포착하는 구조를 설계했다.</div>
+<div class="proj-meta">
+  <span>🗓 2023.12</span>
+  <span>👤 단독 개발</span>
+  <span>📦 Python · pandas · Vue.js · Node.js · SheetJS</span>
+  <span>🏢 재직 중 사내 업무 도구</span>
+</div>
 
-<script>
+<div class="detail-section">
 
-function toggleSection(header) {
-  const wrap = header.closest('.toggle-wrap');
-  if (!wrap) return;
+<!-- 나의 역할 -->
+<div style="font-size:17px;font-weight:700;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px;">🙋 나의 역할<span style="flex:1;height:1px;background:var(--border);margin-left:8px;"></span></div>
+<table class="role-table">
+<tr>
+  <th style="width:100px">기획 · 설계</th>
+  <td>현업 담당자 인터뷰를 통한 검증 프로세스 분석 · 검증 항목 정의 · Excel 다중 소스 교차 검증 로직 설계</td>
+</tr>
+<tr>
+  <th>백엔드 / 자동화<br/><div class="pct-bar"><div class="bar-track"><div class="bar-fill bar-blue" style="width:100%"></div></div><span class="pct">100%</span></div></th>
+  <td>
+    <strong>Python pandas 기반 데이터 파이프라인</strong> — BDN Summary · Data Report(KR) · Daily Report · Collected Data Summary 4종 Excel 자동 파싱 및 정합성 검증<br/>
+    <strong>A-type / B-type 이중 계산 엔진</strong> — BDN 기반 (FirstROB - LastROB + Bunker) vs. Tank 기반 (소비량합 + Correction) 두 방식 모두 구현<br/>
+    <strong>Vue.js 프론트엔드 + Node.js 백엔드</strong> — shipkey 입력 → DCS SUMMARY / DCS SUMMARY OIL 결과 즉시 출력 · 리포트 검증 · 검증 결과 자동 Excel 생성
 
-  let body = null;
-  for (const child of wrap.children) {
-    if (child.classList && child.classList.contains('toggle-body')) {
-      body = child;
-      break;
-    }
-  }
-  if (!body) return;
+  </td>
+</tr>
+</table>
 
-  const arrow = header.querySelector('.toggle-arrow');
-  const willOpen = !body.classList.contains('open') && body.style.display !== 'block';
+<!-- 핵심 성과 -->
+<hr class="tripsnap-topic-divider"/>
+<div style="font-size:17px;font-weight:700;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px;">📊 핵심 성과<span style="flex:1;height:1px;background:var(--border);margin-left:8px;"></span></div>
+<div class="metrics-row">
+  <div class="metric-card"><div class="metric-label">개발 기간</div><div class="metric-value" style="font-size:15px;">1개월</div><div class="metric-sub">입사 직후 단독 완성</div></div>
+  <div class="metric-card"><div class="metric-label">처리 시간</div><div class="metric-value" style="font-size:14px;">1h → 30s</div><div class="metric-sub">선박 1척 기준</div></div>
+  <div class="metric-card"><div class="metric-label">효율 향상</div><div class="metric-value">120×</div><div class="metric-sub">업무 자동화</div></div>
+  <div class="metric-card"><div class="metric-label">검증 항목</div><div class="metric-value">30+</div><div class="metric-sub">소스 3종 교차</div></div>
+</div>
 
-  body.classList.toggle('open', willOpen);
-  body.style.display = willOpen ? 'block' : 'none';
-
-  if (arrow) {
-    arrow.classList.toggle('open', willOpen);
-    arrow.textContent = willOpen ? '▲' : '▼';
-  }
-}
-
-function initToggleSections() {
-  document.querySelectorAll('.toggle-wrap').forEach((wrap) => {
-    const header = wrap.querySelector('.toggle-header');
-    const body = wrap.querySelector('.toggle-body');
-    const arrow = wrap.querySelector('.toggle-arrow');
-    if (!header || !body) return;
-
-    header.setAttribute('role', 'button');
-    header.setAttribute('tabindex', '0');
-
-    const isOpen = body.classList.contains('open');
-    body.style.display = isOpen ? 'block' : 'none';
-    if (arrow) {
-      arrow.classList.toggle('open', isOpen);
-      arrow.textContent = isOpen ? '▲' : '▼';
-    }
-
-    header.onclick = function () { toggleSection(this); };
-    header.onkeydown = function (event) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        toggleSection(this);
-      }
-    };
-  });
-}
-
-function navTo(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-document.addEventListener('DOMContentLoaded', initToggleSections);
-
-// 사이드바 active 상태
-window.addEventListener('scroll', () => {
-  const sections = document.querySelectorAll('.section, [id]');
-  let current = '';
-  sections.forEach(s => {
-    if (s.getBoundingClientRect().top <= 80) current = s.id;
-  });
-  document.querySelectorAll('.nav-item').forEach(n => {
-    n.classList.remove('active');
-    if (n.dataset.target === current) n.classList.add('active');
-  });
-});
-
-
-function openImageModal(src, alt) {
-  const modal = document.getElementById('imageModal');
-  const modalImg = document.getElementById('imageModalImg');
-  if (!modal || !modalImg) return;
-  modalImg.src = src;
-  modalImg.alt = alt || '확대 이미지';
-  modal.classList.add('open');
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('modal-open');
-  const closeBtn = modal.querySelector('.image-modal-close');
-  if (closeBtn) closeBtn.focus();
-}
-
-function closeImageModal() {
-  const modal = document.getElementById('imageModal');
-  const modalImg = document.getElementById('imageModalImg');
-  if (!modal || !modalImg) return;
-  modal.classList.remove('open');
-  modal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('modal-open');
-  modalImg.removeAttribute('src');
-}
-
-function handleProfileImageKey(event, img) {
-  if (event.key === 'Enter' || event.key === ' ') {
-    event.preventDefault();
-    openImageModal(img.src, img.alt);
-  }
-}
-
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') closeImageModal();
-});
-
-
-function handleModalImageKey(event, img) {
-  if (event.key === 'Enter' || event.key === ' ') {
-    event.preventDefault();
-    openImageModal(img.src, img.alt);
-  }
-}
-
-function initBodyImageModal() {
-  document.querySelectorAll('main img:not(.profile-photo)').forEach((img) => {
-    if (!img.src) return;
-    img.classList.add('modal-zoomable-img');
-    img.setAttribute('role', 'button');
-    img.setAttribute('tabindex', '0');
-    img.setAttribute('title', '이미지 크게 보기');
-    img.addEventListener('click', () => openImageModal(img.src, img.alt || '확대 이미지'));
-    img.addEventListener('keydown', (event) => handleModalImageKey(event, img));
-  });
-}
-
-document.addEventListener('DOMContentLoaded', initBodyImageModal);
-
-
-
-</script>
-<script>
-function initNavigation() {
-
-    const navItems =
-        document.querySelectorAll(".nav-item");
-
-    navItems.forEach(item => {
-
-        item.addEventListener("click", (e) => {
-            e.preventDefault();
-
-            const targetId =
-                item.dataset.target;
-
-            const target =
-                document.getElementById(targetId);
-
-            if (!target) return;
-
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        });
-    });
-
-    const sections =
-        document.querySelectorAll("[id]");
-
-    window.addEventListener("scroll", () => {
-
-        let current = "";
-
-        sections.forEach(section => {
-
-            const top =
-                section.offsetTop - 120;
-
-            if (window.scrollY >= top) {
-                current = section.id;
-            }
-        });
-
-        navItems.forEach(item => {
-
-            item.classList.toggle(
-                "active",
-                item.dataset.target === current
-            );
-        });
-    });
-}
-
-document.addEventListener('DOMContentLoaded', initNavigation);
-</script>
-<script>
-function openImageModal(src, alt) {
-  const modal = document.getElementById('imageModal');
-  const modalImg = document.getElementById('imageModalImg');
-  if (!modal || !modalImg) return;
-  modalImg.src = src;
-  modalImg.alt = alt || '확대 이미지';
-  modal.classList.add('open');
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('modal-open');
-  const closeBtn = modal.querySelector('.image-modal-close');
-  if (closeBtn) closeBtn.focus();
-}
-
-function closeImageModal() {
-  const modal = document.getElementById('imageModal');
-  const modalImg = document.getElementById('imageModalImg');
-  if (!modal || !modalImg) return;
-  modal.classList.remove('open');
-  modal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('modal-open');
-  modalImg.removeAttribute('src');
-}
-
-function handleProfileImageKey(event, img) {
-  if (event.key === 'Enter' || event.key === ' ') {
-    event.preventDefault();
-    openImageModal(img.src, img.alt);
-  }
-}
-
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') closeImageModal();
-});
-
-
-function handleModalImageKey(event, img) {
-  if (event.key === 'Enter' || event.key === ' ') {
-    event.preventDefault();
-    openImageModal(img.src, img.alt);
-  }
-}
-
-function initBodyImageModal() {
-  document.querySelectorAll('main img:not
-
-<!-- ── 이미지 모달 ── -->
-<div id="imageModal" class="image-modal" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="image-modal-panel">
-    <button class="image-modal-close" onclick="closeImageModal()" aria-label="닫기">✕</button>
-    <img id="imageModalImg" src="" alt="" />
+<!-- 서비스 화면 -->
+<hr class="tripsnap-topic-divider"/>
+<div style="font-size:17px;font-weight:700;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px;">⚙️ 데이터 파이프라인<span style="flex:1;height:1px;background:var(--border);margin-left:8px;"></span></div>
+<div class="arch-wrap">
+  <div class="arch-title">// shipkey 입력 → 검증 결과 출력 전체 흐름</div>
+  <div class="arch-layers">
+    <div class="arch-layer">
+      <div class="layer-label">Input</div>
+      <div class="layer-boxes">
+        <div class="layer-box lb-gray">shipkey 입력 (웹 UI)</div>
+      </div>
+    </div>
+    <div class="arch-arrow">↓ 선박 식별자로 관련 Excel 파일 자동 탐색</div>
+    <div class="arch-layer">
+      <div class="layer-label">Data Sources</div>
+      <div class="layer-boxes">
+        <div class="layer-box lb-blue">BDN Summary</div>
+        <div class="layer-box lb-blue">Data Report(KR)</div>
+        <div class="layer-box lb-blue">Daily Report</div>
+        <div class="layer-box lb-blue">Collected Data Summary</div>
+      </div>
+    </div>
+    <div class="arch-arrow">↓ pandas 파싱 → A-type / B-type 이중 계산</div>
+    <div class="arch-layer">
+      <div class="layer-label" style="color:var(--accent);font-weight:700;">★ 검증 엔진</div>
+      <div class="layer-boxes">
+        <div class="layer-box lb-purple">A-type: FirstROB−LastROB+Bunker</div>
+        <div class="layer-box lb-purple">B-type: 소비량합+Correction</div>
+        <div class="layer-box lb-purple">3소스 교차 비교 &amp; 오차 산출</div>
+      </div>
+    </div>
+    <div class="arch-arrow">↓ 이상 항목 하이라이트</div>
+    <div class="arch-layer">
+      <div class="layer-label">Output</div>
+      <div class="layer-boxes">
+        <div class="layer-box lb-teal">웹 결과 화면 (DCS SUMMARY · OIL)</div>
+        <div class="layer-box lb-teal">Excel 검증 결과서 자동 생성</div>
+      </div>
+    </div>
   </div>
 </div>
 
+<!-- 코드 핵심 특징 -->
+<hr class="tripsnap-topic-divider"/>
+<div style="font-size:17px;font-weight:700;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px;">💡 코드 핵심 특징<span style="flex:1;height:1px;background:var(--border);margin-left:8px;"></span></div>
+
+<div class="callout blue" style="margin-bottom:12px;">
+  <span class="callout-icon">📂</span>
+  <div><strong>XLSX 드래그 앤 드롭 → 전체 검증 자동 실행</strong><br/>
+  SheetJS(xlsx.js) 라이브러리로 브라우저에서 직접 Excel 파일을 파싱. Daily Report XLSX 하나만 올리면 A-type · B-type · 날짜별 누적 추이 · 항해 데이터 · 벙커링 내역이 전부 자동 계산되어 즉시 화면에 표시.</div>
+</div>
+
+<div class="callout blue" style="margin-bottom:12px;">
+  <span class="callout-icon">🔍</span>
+  <div><strong>동적 컬럼 자동 탐지 (buildColCache)</strong><br/>
+  선박마다 Excel 컬럼 구조가 다른 문제를 정규식 기반 컬럼 캐시로 해결. <code>fuelEnd()</code> 함수로 ULSMGO ≠ MGO 같은 접미사 오분류를 방지. M/E FOC · G/E FOC · BLR FOC · Correction · ROB · Bunkering · Debunkering 각 컬럼을 연료 유형별로 정확히 매핑.</div>
+</div>
+
+<div class="callout blue" style="margin-bottom:12px;">
+  <span class="callout-icon">📈</span>
+  <div><strong>날짜별 누적 추이 계산 (calcRunning) — 핵심 알고리즘</strong><br/>
+  행 단위로 A累(누적 소비량) · B累(ROB 잔량법 누적) · A-B를 실시간 계산. 오차 허용치(0.5 MT) 초과 시점인 <strong>최초 불일치 날짜</strong>를 자동 탐지. 기존에는 연간 총합만 비교하던 검증 방식을 날짜별 누적 추적 방식으로 고도화하여 불일치 원인 날짜를 즉시 특정 가능.</div>
+</div>
+
+<div class="callout blue" style="margin-bottom:12px;">
+  <span class="callout-icon">🎨</span>
+  <div><strong>허용치 기반 3단계 색상 판정 (ok / warn / bad)</strong><br/>
+  |A-B| &lt; 0.5 MT → 초록(OK), &lt; 5 MT → 노랑(WARN), ≥ 5 MT → 빨강(BAD). 연료별 판정, 날짜별 셀 색상, 요약 배너가 모두 같은 기준으로 동기화. 담당자가 숫자를 읽지 않아도 색만으로 이상 여부를 즉시 파악.</div>
+</div>
+
+<div class="callout blue" style="margin-bottom:12px;">
+  <span class="callout-icon">📑</span>
+  <div><strong>5개 탭으로 실무 담당자 맞춤 뷰 분리</strong><br/>
+  차이 추이(날짜별 누적표) · 전체 검증표(A/B 항목별 상세) · 연료별 상세(연료 카드) · 항해 데이터(항차별 스팀/거리) · 벙커링 내역(F.O / L.O 분리) — 담당자 역할에 따라 필요한 탭만 확인하면 되도록 설계. 연료 필터 버튼 · 행 필터(전체/변화 있는 행/불일치 행)로 데이터 탐색 효율 극대화.</div>
+</div>
+
+<hr class="tripsnap-topic-divider"/>
+<div style="font-size:17px;font-weight:700;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px;">🖥 프로그램 화면<span style="flex:1;height:1px;background:var(--border);margin-left:8px;"></span></div>
+
+<!-- 화면 1: 차이 추이 탭 -->
+<div style="margin-bottom:20px;">
+  <div class="img-showcase" style="padding:0;overflow:hidden;border:1px solid var(--border);border-radius:8px;background:#f0f4f8;">
+    <svg viewBox="0 0 1100 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+      <!-- background -->
+      <rect width="1100" height="420" fill="#f0f4f8"/>
+      <!-- summary bar -->
+      <rect x="10" y="10" width="1080" height="72" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+      <!-- ship/period -->
+      <rect x="10" y="10" width="200" height="72" rx="8" fill="white"/>
+      <text x="24" y="30" font-family="Segoe UI,sans-serif" font-size="9" fill="#64748b" font-weight="600">선박 / 기간</text>
+      <text x="24" y="48" font-family="Segoe UI,sans-serif" font-size="11" fill="#0f2d5a" font-weight="700">SAO EBBA</text>
+      <text x="24" y="63" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#64748b">2024-01-01 ~ 2024-12-18</text>
+      <line x1="210" y1="15" x2="210" y2="77" stroke="#f1f5f9" stroke-width="1"/>
+      <!-- A-type total -->
+      <text x="228" y="30" font-family="Segoe UI,sans-serif" font-size="9" fill="#64748b" font-weight="600">A-TYPE 총계</text>
+      <text x="228" y="52" font-family="Segoe UI,sans-serif" font-size="18" fill="#0f2d5a" font-weight="800">13708.92 MT</text>
+      <text x="228" y="67" font-family="Segoe UI,sans-serif" font-size="9" fill="#94a3b8">소비 합산법</text>
+      <line x1="400" y1="15" x2="400" y2="77" stroke="#f1f5f9" stroke-width="1"/>
+      <!-- B-type total -->
+      <text x="418" y="30" font-family="Segoe UI,sans-serif" font-size="9" fill="#64748b" font-weight="600">B-TYPE 총계</text>
+      <text x="418" y="52" font-family="Segoe UI,sans-serif" font-size="18" fill="#0f2d5a" font-weight="800">13660.52 MT</text>
+      <text x="418" y="67" font-family="Segoe UI,sans-serif" font-size="9" fill="#94a3b8">ROB 잔량법</text>
+      <line x1="590" y1="15" x2="590" y2="77" stroke="#f1f5f9" stroke-width="1"/>
+      <!-- A-B diff -->
+      <text x="608" y="30" font-family="Segoe UI,sans-serif" font-size="9" fill="#64748b" font-weight="600">A–B 차이</text>
+      <text x="608" y="52" font-family="Segoe UI,sans-serif" font-size="18" fill="#dc2626" font-weight="800">+48.40 MT</text>
+      <text x="608" y="67" font-family="Segoe UI,sans-serif" font-size="9" fill="#94a3b8">HFO</text>
+      <line x1="780" y1="15" x2="780" y2="77" stroke="#f1f5f9" stroke-width="1"/>
+      <!-- first mismatch -->
+      <text x="798" y="30" font-family="Segoe UI,sans-serif" font-size="9" fill="#64748b" font-weight="600">최초 불일치</text>
+      <text x="798" y="52" font-family="Segoe UI,sans-serif" font-size="15" fill="#f59e0b" font-weight="800">2024-01-01</text>
+      <!-- tabs -->
+      <rect x="10" y="92" width="1080" height="36" rx="6" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="10" y="92" width="110" height="36" fill="#f8fafc"/>
+      <text x="30" y="115" font-family="Segoe UI,sans-serif" font-size="11" fill="#1a4a8a" font-weight="700">📈 차이 추이</text>
+      <rect x="10" y="126" width="110" height="2" fill="#1a4a8a"/>
+      <text x="132" y="115" font-family="Segoe UI,sans-serif" font-size="11" fill="#64748b">📋 전체 검증표</text>
+      <text x="258" y="115" font-family="Segoe UI,sans-serif" font-size="11" fill="#64748b">⛽ 연료별 상세</text>
+      <text x="380" y="115" font-family="Segoe UI,sans-serif" font-size="11" fill="#64748b">🧭 항해 데이터</text>
+      <text x="490" y="115" font-family="Segoe UI,sans-serif" font-size="11" fill="#64748b">🛢 벙커링 내역</text>
+      <!-- alert banner -->
+      <rect x="10" y="138" width="1080" height="60" rx="8" fill="#fff1f2" stroke="#fda4af" stroke-width="1.5"/>
+      <text x="26" y="158" font-family="Segoe UI,sans-serif" font-size="12" fill="#9f1239" font-weight="700">⚠ 최초 불일치 발생: 2024-01-01 — (VOY )</text>
+      <text x="26" y="175" font-family="Segoe UI,sans-serif" font-size="11" fill="#475569">해당 이벤트부터 A-type과 B-type의 누적값에 차이가 발생합니다.</text>
+      <rect x="26" y="183" width="95" height="20" rx="10" fill="#fee2e2"/>
+      <text x="74" y="197" font-family="Segoe UI,sans-serif" font-size="10" fill="#991b1b" font-weight="700" text-anchor="middle">HFO: +48.40 MT</text>
+      <!-- section title -->
+      <text x="10" y="225" font-family="Segoe UI,sans-serif" font-size="12" fill="#0f2d5a" font-weight="700">▌날짜별 누적 검증 테이블</text>
+      <!-- fuel filter -->
+      <text x="10" y="246" font-family="Segoe UI,sans-serif" font-size="11" fill="#374151" font-weight="600">표시 연료:</text>
+      <rect x="78" y="232" width="38" height="20" rx="10" fill="#1a4a8a"/>
+      <text x="97" y="246" font-family="Segoe UI,sans-serif" font-size="10" fill="white" font-weight="600" text-anchor="middle">HFO</text>
+      <rect x="120" y="232" width="40" height="20" rx="10" fill="#1a4a8a"/>
+      <text x="140" y="246" font-family="Segoe UI,sans-serif" font-size="10" fill="white" font-weight="600" text-anchor="middle">MGO</text>
+      <text x="170" y="246" font-family="Segoe UI,sans-serif" font-size="11" fill="#374151">표시 행:</text>
+      <rect x="218" y="232" width="52" height="20" rx="4" fill="white" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="244" y="246" font-family="Segoe UI,sans-serif" font-size="10" fill="#374151" text-anchor="middle">전체 ▾</text>
+      <!-- table header row 1 -->
+      <rect x="10" y="260" width="1080" height="24" fill="#0f2d5a"/>
+      <text x="55" y="276" font-family="Segoe UI,sans-serif" font-size="9" fill="white" font-weight="600" text-anchor="middle">날짜</text>
+      <text x="165" y="276" font-family="Segoe UI,sans-serif" font-size="9" fill="white" font-weight="600" text-anchor="middle">이벤트</text>
+      <text x="270" y="276" font-family="Segoe UI,sans-serif" font-size="9" fill="white" font-weight="600" text-anchor="middle">항차</text>
+      <rect x="308" y="260" width="420" height="24" fill="#1a4a8a"/>
+      <text x="518" y="276" font-family="Segoe UI,sans-serif" font-size="9" fill="white" font-weight="600" text-anchor="middle">HFO</text>
+      <rect x="738" y="260" width="280" height="24" fill="#1a4a8a"/>
+      <text x="878" y="276" font-family="Segoe UI,sans-serif" font-size="9" fill="white" font-weight="600" text-anchor="middle">MGO</text>
+      <rect x="1028" y="260" width="62" height="24" fill="#0f2d5a"/>
+      <text x="1059" y="276" font-family="Segoe UI,sans-serif" font-size="8" fill="white" font-weight="600" text-anchor="middle">최대차이</text>
+      <!-- table header row 2 -->
+      <rect x="10" y="284" width="1080" height="20" fill="#1a4a8a"/>
+      <text x="378" y="297" font-family="Segoe UI,sans-serif" font-size="8.5" fill="white" text-anchor="middle">A累</text>
+      <text x="518" y="297" font-family="Segoe UI,sans-serif" font-size="8.5" fill="white" text-anchor="middle">B累</text>
+      <text x="658" y="297" font-family="Segoe UI,sans-serif" font-size="8.5" fill="white" text-anchor="middle">A–B</text>
+      <text x="798" y="297" font-family="Segoe UI,sans-serif" font-size="8.5" fill="white" text-anchor="middle">A累</text>
+      <text x="878" y="297" font-family="Segoe UI,sans-serif" font-size="8.5" fill="white" text-anchor="middle">B累</text>
+      <text x="958" y="297" font-family="Segoe UI,sans-serif" font-size="8.5" fill="white" text-anchor="middle">A–B</text>
+      <text x="1059" y="297" font-family="Segoe UI,sans-serif" font-size="8.5" fill="white" text-anchor="middle">MT</text>
+      <!-- data rows -->
+      <!-- row 1: 2024-01-01 (first divergence - highlighted) -->
+      <rect x="10" y="304" width="1080" height="22" fill="#fff7ed" stroke="#f97316" stroke-width="1"/>
+      <text x="20" y="319" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#374151">⚠ 2024-01-01</text>
+      <text x="155" y="319" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#374151" text-anchor="middle">VOY</text>
+      <text x="378" y="319" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#374151" text-anchor="end">48.40</text>
+      <text x="518" y="319" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#374151" text-anchor="end">0.00</text>
+      <rect x="620" y="306" width="68" height="16" fill="#fee2e2" rx="2"/>
+      <text x="654" y="318" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+      <text x="798" y="319" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#374151" text-anchor="end">0.00</text>
+      <text x="878" y="319" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#374151" text-anchor="end">0.00</text>
+      <rect x="925" y="306" width="55" height="16" fill="#dcfce7" rx="2"/>
+      <text x="952" y="318" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#166534" font-weight="600" text-anchor="middle">+0.00</text>
+      <rect x="1028" y="306" width="62" height="16" fill="#fee2e2" rx="2"/>
+      <text x="1059" y="318" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+      <!-- rows 2-6 -->
+      <g font-family="Segoe UI,sans-serif" font-size="9.5" fill="#374151">
+        <!-- row 2 -->
+        <rect x="10" y="326" width="1080" height="20" fill="white" stroke="#f1f5f9" stroke-width="0.5"/>
+        <text x="20" y="340">2024-01-02</text><text x="155" y="340" text-anchor="middle">VOY</text>
+        <text x="378" y="340" text-anchor="end">96.43</text><text x="518" y="340" text-anchor="end">48.03</text>
+        <rect x="620" y="328" width="68" height="15" fill="#fee2e2" rx="2"/><text x="654" y="340" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+        <text x="798" y="340" text-anchor="end">0.00</text><text x="878" y="340" text-anchor="end">0.00</text>
+        <rect x="925" y="328" width="55" height="15" fill="#dcfce7" rx="2"/><text x="952" y="340" fill="#166534" font-weight="600" text-anchor="middle">+0.00</text>
+        <rect x="1028" y="328" width="62" height="15" fill="#fee2e2" rx="2"/><text x="1059" y="340" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+        <!-- row 3 -->
+        <rect x="10" y="346" width="1080" height="20" fill="#f8fafc" stroke="#f1f5f9" stroke-width="0.5"/>
+        <text x="20" y="360">2024-01-03</text><text x="155" y="360" text-anchor="middle">VOY</text>
+        <text x="378" y="360" text-anchor="end">146.64</text><text x="518" y="360" text-anchor="end">98.24</text>
+        <rect x="620" y="348" width="68" height="15" fill="#fee2e2" rx="2"/><text x="654" y="360" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+        <text x="798" y="360" text-anchor="end">0.00</text><text x="878" y="360" text-anchor="end">0.00</text>
+        <rect x="925" y="348" width="55" height="15" fill="#dcfce7" rx="2"/><text x="952" y="360" fill="#166534" font-weight="600" text-anchor="middle">+0.00</text>
+        <rect x="1028" y="348" width="62" height="15" fill="#fee2e2" rx="2"/><text x="1059" y="360" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+        <!-- row 4 -->
+        <rect x="10" y="366" width="1080" height="20" fill="white" stroke="#f1f5f9" stroke-width="0.5"/>
+        <text x="20" y="380">2024-01-04</text><text x="155" y="380" text-anchor="middle">VOY</text>
+        <text x="378" y="380" text-anchor="end">194.75</text><text x="518" y="380" text-anchor="end">146.35</text>
+        <rect x="620" y="368" width="68" height="15" fill="#fee2e2" rx="2"/><text x="654" y="380" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+        <text x="798" y="380" text-anchor="end">0.00</text><text x="878" y="380" text-anchor="end">0.00</text>
+        <rect x="925" y="368" width="55" height="15" fill="#dcfce7" rx="2"/><text x="952" y="380" fill="#166534" font-weight="600" text-anchor="middle">+0.00</text>
+        <rect x="1028" y="368" width="62" height="15" fill="#fee2e2" rx="2"/><text x="1059" y="380" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+        <!-- row 5 -->
+        <rect x="10" y="386" width="1080" height="20" fill="#f8fafc" stroke="#f1f5f9" stroke-width="0.5"/>
+        <text x="20" y="400">2024-01-05</text><text x="155" y="400" text-anchor="middle">VOY</text>
+        <text x="378" y="400" text-anchor="end">242.91</text><text x="518" y="400" text-anchor="end">194.51</text>
+        <rect x="620" y="388" width="68" height="15" fill="#fee2e2" rx="2"/><text x="654" y="400" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+        <text x="798" y="400" text-anchor="end">0.00</text><text x="878" y="400" text-anchor="end">0.00</text>
+        <rect x="925" y="388" width="55" height="15" fill="#dcfce7" rx="2"/><text x="952" y="400" fill="#166534" font-weight="600" text-anchor="middle">+0.00</text>
+        <rect x="1028" y="388" width="62" height="15" fill="#fee2e2" rx="2"/><text x="1059" y="400" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+      </g>
+    </svg>
+  </div>
+  <div class="img-caption">① 차이 추이 탭 — 날짜별 A累/B累/A-B 누적 차이 자동 추적. 최초 불일치 날짜를 오렌지 강조로 즉시 표시</div>
+</div>
+
+<!-- 화면 2: 전체 검증표 탭 -->
+<div style="margin-bottom:20px;">
+  <div class="img-showcase" style="padding:0;overflow:hidden;border:1px solid var(--border);border-radius:8px;background:#f0f4f8;">
+    <svg viewBox="0 0 1100 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+      <rect width="1100" height="380" fill="#f0f4f8"/>
+      <!-- tabs -->
+      <rect x="10" y="10" width="1080" height="36" rx="6" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="30" y="32" font-family="Segoe UI,sans-serif" font-size="11" fill="#64748b">📈 차이 추이</text>
+      <rect x="130" y="10" width="110" height="36" fill="#f8fafc"/>
+      <text x="148" y="32" font-family="Segoe UI,sans-serif" font-size="11" fill="#1a4a8a" font-weight="700">📋 전체 검증표</text>
+      <rect x="130" y="44" width="110" height="2" fill="#1a4a8a"/>
+      <text x="258" y="32" font-family="Segoe UI,sans-serif" font-size="11" fill="#64748b">⛽ 연료별 상세</text>
+      <text x="380" y="32" font-family="Segoe UI,sans-serif" font-size="11" fill="#64748b">🧭 항해 데이터</text>
+      <text x="490" y="32" font-family="Segoe UI,sans-serif" font-size="11" fill="#64748b">🛢 벙커링 내역</text>
+      <!-- table -->
+      <rect x="10" y="55" width="1080" height="316" rx="6" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+      <!-- header -->
+      <rect x="10" y="55" width="180" height="44" fill="#0f2d5a"/>
+      <rect x="190" y="55" width="330" height="44" fill="#0f2d5a"/>
+      <rect x="520" y="55" width="140" height="44" fill="#16a34a"/>
+      <rect x="660" y="55" width="140" height="44" fill="#1a4a8a"/>
+      <rect x="800" y="55" width="130" height="44" fill="#7c3aed"/>
+      <rect x="930" y="55" width="80" height="44" fill="#9f1239"/>
+      <rect x="1010" y="55" width="80" height="44" fill="#374151"/>
+      <text x="95" y="81" font-family="Segoe UI,sans-serif" font-size="10" fill="white" font-weight="600" text-anchor="middle">구분</text>
+      <text x="355" y="72" font-family="Segoe UI,sans-serif" font-size="10" fill="white" font-weight="600" text-anchor="middle">항목</text>
+      <text x="380" y="86" font-family="Segoe UI,sans-serif" font-size="9" fill="rgba(255,255,255,.7)" text-anchor="middle">HFO / MGO</text>
+      <text x="590" y="81" font-family="Segoe UI,sans-serif" font-size="10" fill="white" font-weight="700" text-anchor="middle">A합계</text>
+      <text x="730" y="81" font-family="Segoe UI,sans-serif" font-size="10" fill="white" font-weight="700" text-anchor="middle">B합계</text>
+      <text x="865" y="81" font-family="Segoe UI,sans-serif" font-size="10" fill="white" font-weight="700" text-anchor="middle">차이</text>
+      <text x="970" y="81" font-family="Segoe UI,sans-serif" font-size="10" fill="white" font-weight="700" text-anchor="middle">판정</text>
+      <!-- A-type rows -->
+      <rect x="10" y="99" width="180" height="110" fill="#f8fafc"/>
+      <text x="28" y="120" font-family="Segoe UI,sans-serif" font-size="11" fill="#0f2d5a" font-weight="700">A-type</text>
+      <text x="28" y="134" font-family="Segoe UI,sans-serif" font-size="9" fill="#64748b">소비합산법</text>
+      <g font-family="Segoe UI,sans-serif" font-size="10" fill="#475569">
+        <text x="200" y="116">M/E FOC</text><text x="500" y="116" text-anchor="end">11705.88</text><text x="640" y="116" text-anchor="end">197.73</text>
+        <text x="200" y="131">G/E FOC</text><text x="500" y="131" text-anchor="end">1448.61</text><text x="640" y="131" text-anchor="end">270.16</text>
+        <text x="200" y="146">BLR FOC</text><text x="500" y="146" text-anchor="end">0</text><text x="640" y="146" text-anchor="end">86.55</text>
+        <text x="200" y="161">OTHER FOC</text><text x="500" y="161" text-anchor="end">0</text><text x="640" y="161" text-anchor="end">0</text>
+        <text x="200" y="176" fill="#dc2626">Correction (−)</text><text x="500" y="176" fill="#dc2626" text-anchor="end">0</text><text x="640" y="176" fill="#dc2626" text-anchor="end">0</text>
+      </g>
+      <!-- A-type total row -->
+      <rect x="10" y="183" width="1080" height="22" fill="#f0fdf4"/>
+      <text x="200" y="198" font-family="Segoe UI,sans-serif" font-size="10" fill="#0f2d5a" font-weight="800">A-type 합계</text>
+      <text x="500" y="198" font-family="Segoe UI,sans-serif" font-size="10" fill="#0f2d5a" font-weight="800" text-anchor="end">13154.48</text>
+      <text x="640" y="198" font-family="Segoe UI,sans-serif" font-size="10" fill="#0f2d5a" font-weight="800" text-anchor="end">554.44</text>
+      <text x="590" y="198" font-family="Segoe UI,sans-serif" font-size="11" fill="#16a34a" font-weight="800" text-anchor="middle">13708.92</text>
+      <!-- B-type rows -->
+      <rect x="10" y="205" width="180" height="88" fill="#f8fafc"/>
+      <text x="28" y="226" font-family="Segoe UI,sans-serif" font-size="11" fill="#0f2d5a" font-weight="700">B-type</text>
+      <text x="28" y="240" font-family="Segoe UI,sans-serif" font-size="9" fill="#64748b">ROB잔량법</text>
+      <g font-family="Segoe UI,sans-serif" font-size="10" fill="#475569">
+        <text x="200" y="222">First ROB</text><text x="500" y="222" text-anchor="end">3913.77</text><text x="640" y="222" text-anchor="end">410.09</text>
+        <text x="200" y="237" fill="#dc2626">Last ROB (−)</text><text x="500" y="237" fill="#dc2626" text-anchor="end">2851.94</text><text x="640" y="237" fill="#dc2626" text-anchor="end">404.75</text>
+        <text x="200" y="252">Bunkering (+)</text><text x="500" y="252" text-anchor="end">12044.25</text><text x="640" y="252" text-anchor="end">549.10</text>
+        <text x="200" y="267" fill="#dc2626">Debunkering (−)</text><text x="500" y="267" fill="#dc2626" text-anchor="end">0</text><text x="640" y="267" fill="#dc2626" text-anchor="end">0</text>
+      </g>
+      <!-- B-type total row -->
+      <rect x="10" y="275" width="1080" height="22" fill="#eff6ff"/>
+      <text x="200" y="290" font-family="Segoe UI,sans-serif" font-size="10" fill="#0f2d5a" font-weight="800">B-type 합계</text>
+      <text x="500" y="290" font-family="Segoe UI,sans-serif" font-size="10" fill="#0f2d5a" font-weight="800" text-anchor="end">13106.08</text>
+      <text x="640" y="290" font-family="Segoe UI,sans-serif" font-size="10" fill="#0f2d5a" font-weight="800" text-anchor="end">554.44</text>
+      <text x="730" y="290" font-family="Segoe UI,sans-serif" font-size="11" fill="#1a4a8a" font-weight="800" text-anchor="middle">13660.52</text>
+      <!-- A-B diff row -->
+      <rect x="10" y="297" width="1080" height="22" fill="#faf5ff"/>
+      <text x="95" y="312" font-family="Segoe UI,sans-serif" font-size="10" fill="#374151" font-weight="700" text-anchor="middle">A–B 차이</text>
+      <rect x="470" y="299" width="55" height="16" fill="#fee2e2" rx="3"/>
+      <text x="497" y="311" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+      <rect x="608" y="299" width="50" height="16" fill="#dcfce7" rx="3"/>
+      <text x="633" y="311" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#166534" font-weight="700" text-anchor="middle">+0.00</text>
+      <rect x="840" y="299" width="55" height="16" fill="#fee2e2" rx="3"/>
+      <text x="867" y="311" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#991b1b" font-weight="700" text-anchor="middle">+48.40</text>
+      <!-- 판정 row -->
+      <rect x="10" y="319" width="1080" height="22" fill="white" stroke="#e2e8f0" stroke-width="0.5"/>
+      <text x="95" y="334" font-family="Segoe UI,sans-serif" font-size="10" fill="#374151" font-weight="700" text-anchor="middle">판정</text>
+      <text x="497" y="334" font-family="Segoe UI,sans-serif" font-size="13" text-anchor="middle">❌</text>
+      <text x="633" y="334" font-family="Segoe UI,sans-serif" font-size="13" text-anchor="middle">✅</text>
+      <rect x="1000" y="321" width="68" height="16" fill="#fee2e2" rx="3"/>
+      <text x="1034" y="333" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#991b1b" font-weight="700" text-anchor="middle">✗ 불일치</text>
+      <!-- L.O 현황 -->
+      <rect x="10" y="341" width="180" height="30" fill="#f8fafc"/>
+      <text x="28" y="360" font-family="Segoe UI,sans-serif" font-size="10" fill="#0f2d5a" font-weight="600">L.O 현황</text>
+      <text x="200" y="355" font-family="Segoe UI,sans-serif" font-size="9" fill="#64748b">최종 ROB (L)   M/E CYL: 0 | M/E LS CYL: 0 | M/E SYS.: 0 | G/E SYS.: 0</text>
+      <text x="200" y="368" font-family="Segoe UI,sans-serif" font-size="9" fill="#64748b">소비 합계 (L)  M/E CYL: 0 | M/E LS CYL: 0 | M/E SYS.: 0 | G/E SYS.: 0</text>
+    </svg>
+  </div>
+  <div class="img-caption">② 전체 검증표 탭 — A-type(소비합산법) · B-type(ROB잔량법) 전 항목 자동 계산, 연료별 판정 즉시 출력</div>
+</div>
+
+<!-- 화면 3: 연료별 상세 탭 -->
+<div style="margin-bottom:8px;">
+  <div style="max-width:400px;">
+    <div class="img-showcase" style="padding:0;overflow:hidden;border:1px solid var(--border);border-radius:8px;background:#f0f4f8;">
+      <svg viewBox="0 0 400 370" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+        <rect width="400" height="370" fill="#f0f4f8"/>
+        <!-- HFO card -->
+        <rect x="10" y="10" width="380" height="350" rx="10" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+        <!-- card header -->
+        <rect x="10" y="10" width="380" height="42" rx="10" fill="url(#hdr)"/>
+        <defs><linearGradient id="hdr" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0f2d5a"/><stop offset="100%" stop-color="#1a4a8a"/></linearGradient></defs>
+        <rect x="10" y="30" width="380" height="22" fill="#1a4a8a"/>
+        <text x="30" y="36" font-family="Segoe UI,sans-serif" font-size="15" fill="white" font-weight="700">HFO</text>
+        <rect x="305" y="22" width="68" height="20" rx="10" fill="#fee2e2"/>
+        <text x="339" y="36" font-family="Segoe UI,sans-serif" font-size="9.5" fill="#dc2626" font-weight="700" text-anchor="middle">✗ 불일치</text>
+        <!-- A-type section -->
+        <text x="26" y="76" font-family="Segoe UI,sans-serif" font-size="9" fill="#94a3b8" font-weight="700" letter-spacing="0.5">A-TYPE — 소비 합산법</text>
+        <g font-family="Segoe UI,sans-serif" font-size="12" fill="#374151">
+          <text x="26" y="96">M/E</text><text x="374" y="96" text-anchor="end">11705.88 MT</text>
+          <line x1="26" y1="102" x2="374" y2="102" stroke="#f1f5f9" stroke-width="0.5"/>
+          <text x="26" y="116">G/E</text><text x="374" y="116" text-anchor="end">1448.61 MT</text>
+          <line x1="26" y1="122" x2="374" y2="122" stroke="#f1f5f9" stroke-width="0.5"/>
+          <text x="26" y="136">BLR</text><text x="374" y="136" text-anchor="end">0.00 MT</text>
+          <line x1="26" y1="142" x2="374" y2="142" stroke="#f1f5f9" stroke-width="0.5"/>
+          <text x="26" y="156">OTHER</text><text x="374" y="156" text-anchor="end">0.00 MT</text>
+          <line x1="26" y1="162" x2="374" y2="162" stroke="#f1f5f9" stroke-width="0.5"/>
+          <text x="26" y="176" fill="#dc2626">Correction</text><text x="374" y="176" fill="#dc2626" text-anchor="end">0.00 MT</text>
+        </g>
+        <!-- A-type total -->
+        <line x1="26" y1="185" x2="374" y2="185" stroke="#e2e8f0" stroke-width="1.5"/>
+        <text x="26" y="203" font-family="Segoe UI,sans-serif" font-size="13" fill="#374151" font-weight="700">A-type 합계</text>
+        <text x="374" y="203" font-family="Segoe UI,sans-serif" font-size="15" fill="#0f2d5a" font-weight="800" text-anchor="end">13154.48 MT</text>
+        <!-- B-type section -->
+        <text x="26" y="228" font-family="Segoe UI,sans-serif" font-size="9" fill="#94a3b8" font-weight="700" letter-spacing="0.5">B-TYPE — ROB 잔량법</text>
+        <g font-family="Segoe UI,sans-serif" font-size="12" fill="#374151">
+          <text x="26" y="248">First ROB</text><text x="374" y="248" text-anchor="end">3913.77 MT</text>
+          <line x1="26" y1="254" x2="374" y2="254" stroke="#f1f5f9" stroke-width="0.5"/>
+          <text x="26" y="268" fill="#dc2626">Last ROB</text><text x="374" y="268" fill="#dc2626" text-anchor="end">2851.94 MT</text>
+          <line x1="26" y1="274" x2="374" y2="274" stroke="#f1f5f9" stroke-width="0.5"/>
+          <text x="26" y="288">Bunkering</text><text x="374" y="288" text-anchor="end">12044.25 MT</text>
+        </g>
+        <!-- B-type total -->
+        <line x1="26" y1="297" x2="374" y2="297" stroke="#e2e8f0" stroke-width="1.5"/>
+        <text x="26" y="315" font-family="Segoe UI,sans-serif" font-size="13" fill="#374151" font-weight="700">B-type 합계</text>
+        <text x="374" y="315" font-family="Segoe UI,sans-serif" font-size="15" fill="#0f2d5a" font-weight="800" text-anchor="end">13106.08 MT</text>
+        <!-- A-B diff pill -->
+        <rect x="26" y="328" width="348" height="26" rx="7" fill="#fee2e2"/>
+        <text x="120" y="345" font-family="Segoe UI,sans-serif" font-size="11" fill="#991b1b" font-weight="700">A–B 차이</text>
+        <text x="374" y="345" font-family="Segoe UI,sans-serif" font-size="13" fill="#991b1b" font-weight="800" text-anchor="end">+48.40 MT</text>
+      </svg>
+    </div>
+    <div class="img-caption">③ 연료별 상세 탭 — 연료 유형별 카드로 A/B-type 세부 계산 및 불일치 결과 한눈에 표시</div>
+  </div>
+</div>
+
+<hr class="tripsnap-topic-divider"/>
+<div style="font-size:17px;font-weight:700;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px;">🛠 기술 스택<span style="flex:1;height:1px;background:var(--border);margin-left:8px;"></span></div>
+<table class="skill-table">
+  <tr>
+    <th>언어 / 프레임워크</th>
+    <td><div class="skill-chips"><span class="sc sc-blue">Python</span><span class="sc sc-teal">Vue.js</span><span class="sc sc-teal">Node.js</span><span class="sc sc-gray">JavaScript</span></div></td>
+  </tr>
+  <tr>
+    <th>데이터 처리</th>
+    <td><div class="skill-chips"><span class="sc sc-blue">pandas</span><span class="sc sc-blue">numpy</span><span class="sc sc-gray">SheetJS</span><span class="sc sc-gray">xlsx</span></div></td>
+  </tr>
+  <tr>
+    <th>검증 대상</th>
+    <td><div class="skill-chips"><span class="sc sc-orange">IMO DCS</span><span class="sc sc-orange">BDN Summary</span><span class="sc sc-orange">Data Report(KR)</span><span class="sc sc-orange">Daily Report</span><span class="sc sc-orange">Collected Data Summary</span></div></td>
+  </tr>
+</table>
+
+</div><!-- /detail-section -->
+</div><!-- /proj-card -->
+</div><!-- /section imodcs-detail -->
+
+</main>
+
 <script>
-// 모달 초기화 — 프로필 사진 제외한 모든 이미지에 클릭 이벤트 부착
-function initBodyImageModal() {
-  document.querySelectorAll('main img:not(.profile-photo)').forEach(function(img) {
-    if (!img.src) return;
-    img.classList.add('modal-zoomable-img');
-    img.setAttribute('role', 'button');
-    img.setAttribute('tabindex', '0');
-    img.setAttribute('title', '이미지 크게 보기');
-    img.addEventListener('click', function() { openImageModal(img.src, img.alt || ''); });
-    img.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openImageModal(img.src, img.alt || ''); }
+// 사이드바 네비게이션
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.nav-item[data-target]').forEach(function(item) {
+    item.addEventListener('click', function() {
+      var targetId = item.getAttribute('data-target');
+      var el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
 
-  // 모
+  // 스크롤 시 active 상태 업데이트
+  window.addEventListener('scroll', function() {
+    var current = '';
+    document.querySelectorAll('[id]').forEach(function(el) {
+      if (el.getBoundingClientRect().top <= 100) {
+        current = el.id;
+      }
+    });
+    document.querySelectorAll('.nav-item').forEach(function(n) {
+      n.classList.remove('active');
+      if (n.getAttribute('data-target') === current) n.classList.add('active');
+    });
+  });
+
+  // 토글 섹션 - 기본값: 모두 열림
+  document.querySelectorAll('.toggle-body').forEach(function(body) {
+    body.style.display = 'block';
+    body.classList.add('open');
+  });
+  document.querySelectorAll('.toggle-arrow').forEach(function(arrow) {
+    arrow.textContent = '▲';
+  });
+
+  // 전역 토글 함수
+});
+
+function toggleSection(header) {
+  var wrap = header.parentElement;
+  var body = wrap.querySelector('.toggle-body');
+  var arrow = wrap.querySelector('.toggle-arrow');
+  if (!body) return;
+  var isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  body.classList.toggle('open', !isOpen);
+  if (arrow) arrow.textContent = isOpen ? '▼' : '▲';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // 이미지 모달
+  document.querySelectorAll('main img:not(.profile-photo)').forEach(function(img) {
+    if (!img.src) return;
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', function() {
+      var modal = document.getElementById('imageModal');
+      var modalImg = document.getElementById('imageModalImg');
+      if (modal && modalImg) {
+        modalImg.src = img.src;
+        modal.style.display = 'flex';
+      }
+    });
+  });
+  var modal = document.getElementById('imageModal');
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var m = document.getElementById('imageModal');
+      if (m) m.style.display = 'none';
+    }
+  });
+});
+</script>
+
+<div id="imageModal">
+  <span id="imageModalClose" onclick="document.getElementById('imageModal').style.display='none'">✕</span>
+  <img id="imageModalImg" src="" alt="확대 이미지" onclick="event.stopPropagation()"/>
+</div>
+</body>
+</html>
